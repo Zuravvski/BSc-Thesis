@@ -1,0 +1,48 @@
+<!--
+variable = n * bytes
+status = { Failed = 0, OK = 1 }
+subscribe = { NO = 0, YES = 1 }
+posX  - size = 4, target type = double
+posY  - size = 4, target type = double
+angle - size = 4, target type = double
+-->
+
+<Network_Packets>
+	<Connection>
+		<Requests>
+			<Packet type = "DISCONNECT_REQ" header = "0">
+				<Data_structure length="variable" data="ROBOT_ID" size="2" data_type="string" encoding="BIG_ENDIAN"/>
+			</Packet>
+			
+			<Packet type = "CONNECT_REQ" header = "1">
+				<Data_structure length="variable" data="ROBOT_ID" size="2" data_type="string" encoding="BIG_ENDIAN"/>
+			</Packet>
+		</Requests>
+		
+		<Responses>
+			<Packet type = "CONNECT_ACK" header = "2">
+				<Data_structure length="fixed" data="ROBOT_ID + Status" size="3" data_type="string" encoding="BIG_ENDIAN"/>
+			</Packet>
+		</Responses>
+	</Connection>
+	
+	<Driver>
+		<Requests>
+			<Packet type = "POSITION_REQ" header = "3">
+				<Data_structure length="variable" data="ROBOT_ID + Subscribe" size="3" data_type="string" encoding="BIG_ENDIAN"/>
+			</Packet>
+			
+			<Packet type = "VELOCITY_REQ" header = "5">
+				<Data_structure length="variable" data="ROBOT_ID + MotorL + MotorR" size="6 (3 x 2 bytes)" data_type="string" encoding="BIG_ENDIAN"/>
+			</Packet>
+		</Requests>
+		
+		<Responses>
+			<Packet type = "POSITION_ACK" header = "4">
+				<Data_structure length="variable" data="ROBOT_ID + posX + posY + angle" size="14" data_type="string" encoding="BIG_ENDIAN"/>
+			</Packet>
+			
+			<Packet type = "VELOCITY_ACK" header = "6"  deprecated = "true"/>
+		</Responses>
+	</Driver>
+</Network_Packets>
