@@ -1,31 +1,39 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
-using Infrastructure.Commands.Robots;
+using Infrastructure.Extensions;
+using Infrastructure.Network.Packets.Requests;
 using Infrastructure.Services.Robots;
-using Infrastructure.Services.Users;
+using Protocol.Robots;
 
 namespace Infrastructure.Handlers.Robots
 {
     public class DriveHandler : ICommandHandler<Drive>
     {
         private readonly IRobotService _robotService;
-        private readonly IUserService _userService;
 
-        public DriveHandler(IRobotService robotService, IUserService userService)
+        public DriveHandler(IRobotService robotService)
         {
             _robotService = robotService;
-            _userService = userService;
         }
 
-        public async Task HandleAsync(Drive command)
+        public async Task HandleAsync(Drive command, string clientIP)
         {
-            await Task.Run(() =>
+            var robot = await _robotService.GetRobotAsync(command.RobotID);
+            if (robot == null)
             {
-                Console.WriteLine($"Driving robot with ID: {command.RobotID}.");
-                Console.WriteLine($"Left motor: {command.LeftMotor}");
-                Console.WriteLine($"Right motor: {command.RightMotor}");
-                Console.WriteLine($"LEDs: {command.LEDs}");
-            });
+                return;
+            }
+
+            if (robot.BoundTo == clientIP)
+            {
+                var packet = Packet.Create($"{command.LEDs.Description()}{command.LeftMotor}{command.RightMotor}");
+                await robot.WriteAsync(packet.ToRawData());
+                Debug.WriteLine($"Drive payload: {packet.Payload}");
+            }
+            else
+            {
+                Debug.WriteLine($"Client does not own the robot with ID {command.RobotID}");
+            }
         }
     }
 }

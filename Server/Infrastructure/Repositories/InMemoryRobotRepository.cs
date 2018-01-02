@@ -10,6 +10,11 @@ namespace Infrastructure.Repositories
     {
         private readonly ISet<Robot> _robots = new HashSet<Robot>();
 
+        public async Task<Robot> GetRobotAsync(string ip)
+        {
+            return await Task.FromResult(_robots.FirstOrDefault(robot => robot.IPAddress.Equals(ip)));
+        }
+
         public async Task<Robot> GetRobotAsync(uint id)
         {
             return await Task.FromResult(_robots.FirstOrDefault(robot => robot.ID == id));
@@ -26,9 +31,9 @@ namespace Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task DeleteRobotAsync(uint id)
+        public async Task DeleteRobotAsync(string ip)
         {
-            var robot = await GetRobotAsync(id);
+            var robot = await GetRobotAsync(ip);
             _robots.Remove(robot);
             await Task.CompletedTask;
         }

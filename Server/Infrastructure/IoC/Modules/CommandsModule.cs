@@ -13,10 +13,14 @@ namespace Infrastructure.IoC.Modules
             var assembly = typeof(CommandsModule).GetTypeInfo().Assembly;
 
             builder.RegisterAssemblyTypes(assembly)
-                .AssignableTo(typeof(ICommandHandler<>))
+                .AsClosedTypesOf(typeof(ICommandHandler<>))
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<CommandDispatcher>()
+            //builder.RegisterType<CommandDispatcher>()
+            //    .As<ICommandDispatcher>()
+            //    .InstancePerLifetimeScope();
+
+            builder.Register((c, p) => new CommandDispatcher(c.Resolve<IComponentContext>(), p.Named<string>("ClientIP")))
                 .As<ICommandDispatcher>()
                 .InstancePerLifetimeScope();
         }

@@ -1,8 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
+using Autofac;
 using Infrastructure.Commands;
 using Infrastructure.Network.Packets.Requests;
+using Infrastructure.Repositories;
+using Newtonsoft.Json;
+using Protocol;
+using Protocol.Users;
 
 namespace Infrastructure.Network.Sockets
 {
@@ -12,20 +21,21 @@ namespace Infrastructure.Network.Sockets
 
         private readonly TcpClient _socket;
         private readonly NetworkStream _stream;
-        private readonly RequestCommandFactory _commandFactory;
         private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IClientRepository _clientRepository;
 
-        private static readonly int BUFFER_SIZE = 1024;
+        public bool Connected => _socket != null && _socket.Connected;
+        public string IPAddress { get; }
 
-        public bool Connected => _socket.Connected;
 
-        public Client(TcpClient clientSocket, RequestCommandFactory requestCommandFactory, ICommandDispatcher commandDispatcher)
+        public Client(TcpClient clientSocket, IClientRepository clientRepository, IComponentContext context)
         {
             _socket = clientSocket;
             _stream = _socket.GetStream();
-            _commandFactory = requestCommandFactory;
-            _commandDispatcher = commandDispatcher;
+            _clientRepository = clientRepository;
 
+            IPAddress = (_socket.Client.RemoteEndPoint as IPEndPoint).Address.ToString();
+            _commandDispatcher = context.Resolve<ICommandDispatcher>(new NamedParameter("ClientIP", IPAddress));
             ReadAsync();
         }
 
@@ -35,29 +45,39 @@ namespace Infrastructure.Network.Sockets
             await _stream.WriteAsync(rawData, 0, rawData.Length);
         }
 
-        private async Task ReadAsync()
-        {
+        private async void ReadAsync()
+        { 
+            var settings = new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.All};
             while (Connected)
             {
                 try
                 {
-                    var buffer = new byte[BUFFER_SIZE];
-                    var bytesRead = await _stream.ReadAsync(buffer, 0, BUFFER_SIZE);
-                    Array.Resize(ref buffer, bytesRead);
-                    var packet = Packet.CreateFromRawData(buffer);
+                    var buffer = new byte[1024];
+                    var bytesRead = await _stream.ReadAsync(buffer, 0, buffer.Length);
+                    var read = Encoding.ASCII.GetString(buffer);
 
-                    if (packet == null)
+                    if (bytesRead == 0)
+                    {
+                        _socket.Close();
                         continue;
+                    }
 
-                    var command = _commandFactory.GetRequest(packet, this);
+                    var command = JsonConvert.DeserializeObject<ICommand>(read, settings);
                     await _commandDispatcher.DispatchAsync(command);
                 }
+                catch (IOException)
+                {
+                    _socket.Close();
+                } 
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("Invalid packet");
                 }
             }
+            Debug.WriteLine($"Client with IP: {IPAddress} disconnected");
+            await _clientRepository.DeleteClientAsync(IPAddress);
+            await _commandDispatcher.DispatchAsync(new UnbindAllRobots());
         }
     }
 }

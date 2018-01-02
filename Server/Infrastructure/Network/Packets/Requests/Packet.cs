@@ -31,7 +31,7 @@ namespace Infrastructure.Network.Packets.Requests
 
             var packet = new Packet
             {
-                Payload = packetData.Substring(2)
+                Payload = packetData
             };
             return packet;
         }
@@ -46,8 +46,7 @@ namespace Infrastructure.Network.Packets.Requests
 
         public byte[] ToRawData()
         {
-            var data = FRAME_BEGIN + Payload + FRAME_END;
-            return Encoding.ASCII.GetBytes(data);
+            return Encoding.ASCII.GetBytes(Payload);
         }
     }
 }

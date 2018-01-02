@@ -1,24 +1,23 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Infrastructure.Repositories;
 using Infrastructure.Services.Robots;
 using Protocol.Users;
 
 namespace Infrastructure.Handlers.Users
 {
-    public class BindRobotHandler : ICommandHandler<BindRobot>
+    public class UnbindRobotHandler : ICommandHandler<UnbindRobot>
     {
         private readonly IRobotService _robotService;
 
-        public BindRobotHandler(IRobotService robotService)
+        public UnbindRobotHandler(IRobotService robotService)
         {
             _robotService = robotService;
         }
 
-        public async Task HandleAsync(BindRobot command, string clientIP)
+        public async Task HandleAsync(UnbindRobot command, string clientIP)
         {
             var robot = await _robotService.GetRobotAsync(command.ID);
-            robot?.Bind(clientIP);
+            robot?.Unbind();
         }
     }
 }

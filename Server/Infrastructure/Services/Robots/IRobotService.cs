@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Domain.Users;
-using Infrastructure.DTO;
+using Core.Domain.Robots;
 
 namespace Infrastructure.Services.Robots
 {
     public interface IRobotService : IService
     {
-        Task CreateAsync(uint robotID);
-        Task DeleteAsync(uint robotID);
-        Task BindUserAsync(uint robotID, User user);
-        Task UnbindUserAsync(uint robotID, User user);
-        Task<IEnumerable<RobotDTO>> BrowseAsync();
+        // CRUD
+        Task CreateAsync(string ip);
+        Task DeleteAsync(string ip);
+        Task<Robot> GetRobotAsync(uint id);
+        Task<Robot> GetRobotAsync(string ip);
+        Task<IEnumerable<Robot>> BrowseAsync();
     }
 }

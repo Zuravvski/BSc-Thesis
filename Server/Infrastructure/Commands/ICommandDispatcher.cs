@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Protocol;
 
 namespace Infrastructure.Commands
 {

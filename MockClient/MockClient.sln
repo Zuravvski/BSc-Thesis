@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockClient", "MockClient\MockClient.csproj", "{7164B383-C45D-43CC-87F2-A35F8FDE387A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocol", "..\Server\Protocol\Protocol.csproj", "{7AD8CE0E-61A2-4493-BBBB-26C1ED9B1998}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7164B383-C45D-43CC-87F2-A35F8FDE387A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7164B383-C45D-43CC-87F2-A35F8FDE387A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7164B383-C45D-43CC-87F2-A35F8FDE387A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7164B383-C45D-43CC-87F2-A35F8FDE387A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AD8CE0E-61A2-4493-BBBB-26C1ED9B1998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AD8CE0E-61A2-4493-BBBB-26C1ED9B1998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AD8CE0E-61A2-4493-BBBB-26C1ED9B1998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AD8CE0E-61A2-4493-BBBB-26C1ED9B1998}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

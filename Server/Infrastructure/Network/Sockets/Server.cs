@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using Autofac;
 using Infrastructure.IoC;
-using Infrastructure.Network.Packets.Requests;
+using Infrastructure.Repositories;
 using Infrastructure.Services;
-using Infrastructure.Services.Robots;
 
 namespace Infrastructure.Network.Sockets
 {
     public class Server
     {
         private readonly TcpListener _socket;
-        private readonly List<Client> _clientsList;
+        private readonly IClientRepository _clientRepository;
 
         public bool Running => _socket.Server.Connected;
 
@@ -22,8 +20,8 @@ namespace Infrastructure.Network.Sockets
         public Server()
         {
             _socket = new TcpListener(IPAddress.Any, 50131);
-            _clientsList = new List<Client>();
-           InitializeAutofac();
+            InitializeAutofac();
+            _clientRepository = ApplicationContainer.Resolve<IClientRepository>();
         }
 
         public void Start()
@@ -41,7 +39,7 @@ namespace Infrastructure.Network.Sockets
                 var clientSocket = await _socket.AcceptTcpClientAsync();
                 var clientFactory = ApplicationContainer.Resolve<Client.Factory>();
                 var client = clientFactory.Invoke(clientSocket);
-                _clientsList.Add(client);
+                await _clientRepository.CreateClientAsync(client);
             }
         }
 
@@ -50,12 +48,11 @@ namespace Infrastructure.Network.Sockets
             // Autofac configuration
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<Client>().InstancePerLifetimeScope();
-            containerBuilder.RegisterInstance(new RequestCommandFactory()).SingleInstance();
             containerBuilder.RegisterModule(new ContainerModule());
             ApplicationContainer = containerBuilder.Build();
-
-            var dataInitializer = new DataInitializer(ApplicationContainer.Resolve<IRobotService>());
-            await dataInitializer.SeedAsync();
+ 
+            // Initializing test data
+            await ApplicationContainer.Resolve<IDataInitializer>().SeedAsync();
         }
     }
 }

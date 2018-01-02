@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Extensions
+﻿using System.CodeDom;
+
+namespace Infrastructure.Extensions
 {
     public static class StringExtensions
     {

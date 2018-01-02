@@ -6,13 +6,6 @@ namespace Infrastructure.IoC
 {
     public class ContainerModule : Module
     {
-        //private readonly IContainer _container;
-
-        //public ContainerModule(IContainer container)
-        //{
-        //    _container = container;
-        //}
-
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterInstance(AutoMapperConfig.Initialize()).SingleInstance();

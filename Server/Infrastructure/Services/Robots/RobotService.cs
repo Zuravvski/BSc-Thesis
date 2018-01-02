@@ -2,10 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Core.Domain.Robots;
-using Core.Domain.Users;
 using Core.Repositories;
-using Infrastructure.DTO;
-using Infrastructure.Repositories;
 
 namespace Infrastructure.Services.Robots
 {
@@ -20,32 +17,29 @@ namespace Infrastructure.Services.Robots
             _mapper = mapper;
         }
 
-        public async Task CreateAsync(uint robotID)
+        public async Task CreateAsync(string ip)
         {
-            await _robotRepository.CreateRobotAsync(new Robot(robotID));
+            await _robotRepository.CreateRobotAsync(new Robot(ip));
         }
 
-        public async Task DeleteAsync(uint robotID)
+        public async Task DeleteAsync(string ip)
         {
-            await _robotRepository.DeleteRobotAsync(robotID);
+            await _robotRepository.DeleteRobotAsync(ip);
         }
 
-        public async Task BindUserAsync(uint robotID, User user)
+        public async Task<IEnumerable<Robot>> BrowseAsync()
         {
-            var robot = await _robotRepository.GetRobotAsync(robotID);
-            robot?.BindUser(user);
+            return await _robotRepository.GetAllRobotsAsync();
         }
 
-        public async Task UnbindUserAsync(uint robotID, User user)
+        public async Task<Robot> GetRobotAsync(uint id)
         {
-            var robot = await _robotRepository.GetRobotAsync(robotID);
-            robot?.UnbindUser(user);
+            return await _robotRepository.GetRobotAsync(id);
         }
 
-        public async Task<IEnumerable<RobotDTO>> BrowseAsync()
+        public async Task<Robot> GetRobotAsync(string ip)
         {
-            var robots = await _robotRepository.GetAllRobotsAsync();
-            return _mapper.Map<IEnumerable<Robot>, IEnumerable<RobotDTO>>(robots);
+            return await _robotRepository.GetRobotAsync(ip);
         }
     }
 }

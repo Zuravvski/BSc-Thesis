@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5415AA5-8401-4CE9-9A23-17F32C163755}</ProjectGuid>
+    <ProjectGuid>{7AD8CE0E-61A2-4493-BBBB-26C1ED9B1998}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Protocol</RootNamespace>
+    <AssemblyName>Protocol</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,15 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Camera\IndustrialCamera.cs" />
-    <Compile Include="Domain\Robots\Enums\ERobotLED.cs" />
-    <Compile Include="Domain\Robots\Robot.cs" />
-    <Compile Include="Domain\Robots\Position.cs" />
+    <Compile Include="Camera\RequestPosition.cs" />
+    <Compile Include="Camera\SubscribePosition.cs" />
+    <Compile Include="Enums\ERobotLED.cs" />
+    <Compile Include="ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\IRobotRepository.cs" />
+    <Compile Include="Robots\BrowseAvailableRobots.cs" />
+    <Compile Include="Robots\Drive.cs" />
+    <Compile Include="Robots\DriveMany.cs" />
+    <Compile Include="Users\BindManyRobots.cs" />
+    <Compile Include="Users\BindRobot.cs" />
+    <Compile Include="Users\UnbindAllRobots.cs" />
+    <Compile Include="Users\UnbindRobot.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

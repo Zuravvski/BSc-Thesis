@@ -45,6 +45,10 @@
       <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,45 +60,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\PacketAttribute.cs" />
-    <Compile Include="Commands\Camera\RequestPosition.cs" />
     <Compile Include="Commands\CommandDispatcher.cs" />
-    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandDispatcher.cs" />
-    <Compile Include="Commands\Camera\SubscribePosition.cs" />
-    <Compile Include="Commands\IPacketInitializable.cs" />
-    <Compile Include="Commands\Users\CreateUser.cs" />
-    <Compile Include="Commands\Users\DeleteUser.cs" />
-    <Compile Include="Commands\Users\UnbindRobot.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
-    <Compile Include="DTO\IDTO.cs" />
     <Compile Include="DTO\RobotDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
-    <Compile Include="Commands\Robots\Drive.cs" />
-    <Compile Include="Commands\Users\BindRobot.cs" />
+    <Compile Include="Handlers\Robots\BrowseAvailableRobotsHandler.cs" />
     <Compile Include="Handlers\Robots\DriveHandler.cs" />
+    <Compile Include="Handlers\Robots\DriveManyHandler.cs" />
+    <Compile Include="Handlers\Users\BindManyRobotsHandler.cs" />
     <Compile Include="Handlers\Users\BindRobotHandler.cs" />
-    <Compile Include="Handlers\Users\CreateUserHandler.cs" />
-    <Compile Include="Handlers\Users\DeleteUserHandler.cs" />
+    <Compile Include="Handlers\Users\UnbindAllRobotsHandler.cs" />
+    <Compile Include="Handlers\Users\UnbindRobotHandler.cs" />
     <Compile Include="IoC\ContainerModule.cs" />
     <Compile Include="IoC\Modules\CommandsModule.cs" />
     <Compile Include="IoC\Modules\RepositoryModule.cs" />
     <Compile Include="IoC\Modules\ServicesModule.cs" />
-    <Compile Include="Network\Packet.cs" />
-    <Compile Include="Network\PacketManager.cs" />
+    <Compile Include="Network\Sockets\Client.cs" />
+    <Compile Include="Network\Packets\Requests\Packet.cs" />
+    <Compile Include="Network\Packets\Requests\RequestType.cs" />
+    <Compile Include="Network\Sockets\Server.cs" />
+    <Compile Include="Repositories\IClientRepository.cs" />
+    <Compile Include="Repositories\InMemoryClientRepository.cs" />
     <Compile Include="Repositories\InMemoryRobotRepository.cs" />
-    <Compile Include="Repositories\InMemoryUserRepository.cs" />
     <Compile Include="Services\Camera\CameraService.cs" />
     <Compile Include="Services\Camera\ICameraService.cs" />
     <Compile Include="Services\DataInitializer.cs" />
+    <Compile Include="Services\IDataInitializer.cs" />
     <Compile Include="Services\Robots\IRobotService.cs" />
     <Compile Include="Services\IService.cs" />
-    <Compile Include="Services\Users\IUserService.cs" />
     <Compile Include="Services\Robots\RobotService.cs" />
-    <Compile Include="Services\Users\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\ICallerAware.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -107,6 +106,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{D5415AA5-8401-4CE9-9A23-17F32C163755}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Protocol\Protocol.csproj">
+      <Project>{7AD8CE0E-61A2-4493-BBBB-26C1ED9B1998}</Project>
+      <Name>Protocol</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Infrastructure.Commands;
+using Protocol;
 
 namespace Infrastructure.Handlers
 {
     public interface ICommandHandler<in T> where T : ICommand
     {
-        Task HandleAsync(T command);
+        Task HandleAsync(T command, string clientIP);
     }
 }
