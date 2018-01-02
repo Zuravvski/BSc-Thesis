@@ -6,7 +6,7 @@ using Protocol.Robots;
 
 namespace Infrastructure.Handlers.Robots
 {
-    public class BrowseAvailableRobotsHandler : ICommandHandler<BrowseAvailableRobots>
+    public class BrowseAvailableRobotsHandler : IClientCommandHandler<BrowseAvailableRobots>
     {
         private readonly IRobotService _robotService;
 

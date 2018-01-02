@@ -5,7 +5,7 @@ using Protocol.Users;
 
 namespace Infrastructure.Handlers.Users
 {
-    public class UnbindAllRobotsHandler : ICommandHandler<UnbindAllRobots>
+    public class UnbindAllRobotsHandler : IClientCommandHandler<UnbindAllRobots>
     {
         private readonly IRobotService _robotService;
 

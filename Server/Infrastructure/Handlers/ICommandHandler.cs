@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
-using Protocol;
-
-namespace Infrastructure.Handlers
+﻿namespace Infrastructure.Handlers
 {
-    public interface ICommandHandler<in T> where T : ICommand
+    public interface ICommandHandler
     {
-        Task HandleAsync(T command, string clientIP);
+        // Marker interface
     }
 }

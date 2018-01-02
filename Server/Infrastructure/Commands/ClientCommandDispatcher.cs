@@ -7,12 +7,12 @@ using Protocol;
 
 namespace Infrastructure.Commands
 {
-    public class CommandDispatcher : ICommandDispatcher
+    public class ClientCommandDispatcher : IClientCommandDispatcher
     {
         private readonly IComponentContext _componentContext;
-        private string _clientIP;
+        private readonly string _clientIP;
 
-        public CommandDispatcher(IComponentContext componentContext, string ClientIP)
+        public ClientCommandDispatcher(IComponentContext componentContext, string ClientIP)
         {
             _componentContext = componentContext;
             _clientIP = ClientIP;
@@ -26,7 +26,7 @@ namespace Infrastructure.Commands
                 throw new ArgumentNullException();
             }
 
-            var handlerType = typeof(ICommandHandler<>).MakeGenericType(command.GetType());
+            var handlerType = typeof(IClientCommandHandler<>).MakeGenericType(command.GetType());
             dynamic handler = _componentContext.Resolve(handlerType);
             await handler.HandleAsync((dynamic)command, _clientIP);
         }

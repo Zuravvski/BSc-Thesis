@@ -1,12 +1,10 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
-using Infrastructure.Repositories;
+﻿using System.Threading.Tasks;
 using Infrastructure.Services.Robots;
 using Protocol.Users;
 
 namespace Infrastructure.Handlers.Users
 {
-    public class BindRobotHandler : ICommandHandler<BindRobot>
+    public class BindRobotHandler : IClientCommandHandler<BindRobot>
     {
         private readonly IRobotService _robotService;
 

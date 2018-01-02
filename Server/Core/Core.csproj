@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Camera\IndustrialCamera.cs" />
     <Compile Include="Domain\Robots\Enums\ERobotLED.cs" />
     <Compile Include="Domain\Robots\Robot.cs" />
     <Compile Include="Domain\Robots\Position.cs" />

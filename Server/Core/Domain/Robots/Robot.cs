@@ -44,7 +44,7 @@ namespace Core.Domain.Robots
                 _stream = _socket.GetStream();
                 ReadAsync();
             }
-            catch (Exception e)
+            catch
             {
                 Debug.WriteLine($"Could not connect to the robot with ID: {ID}");
             }

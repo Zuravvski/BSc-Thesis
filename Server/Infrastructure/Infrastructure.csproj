@@ -60,13 +60,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\PacketAttribute.cs" />
-    <Compile Include="Commands\CommandDispatcher.cs" />
+    <Compile Include="Commands\CameraCommandDispatcher.cs" />
+    <Compile Include="Commands\ClientCommandDispatcher.cs" />
+    <Compile Include="Commands\ICameraCommand.cs" />
+    <Compile Include="Commands\ICameraCommandDispatcher.cs" />
+    <Compile Include="Commands\IClientCommandDispatcher.cs" />
     <Compile Include="Commands\ICommandDispatcher.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="DTO\RobotDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Handlers\ICameraCommandHandler.cs" />
+    <Compile Include="Handlers\IClientCommandHandler.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
     <Compile Include="Handlers\Robots\BrowseAvailableRobotsHandler.cs" />
     <Compile Include="Handlers\Robots\DriveHandler.cs" />

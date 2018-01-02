@@ -7,7 +7,7 @@ using Protocol.Robots;
 
 namespace Infrastructure.Handlers.Robots
 {
-    public class DriveHandler : ICommandHandler<Drive>
+    public class DriveHandler : IClientCommandHandler<Drive>
     {
         private readonly IRobotService _robotService;
 

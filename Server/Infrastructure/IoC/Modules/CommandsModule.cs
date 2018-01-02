@@ -13,15 +13,19 @@ namespace Infrastructure.IoC.Modules
             var assembly = typeof(CommandsModule).GetTypeInfo().Assembly;
 
             builder.RegisterAssemblyTypes(assembly)
-                .AsClosedTypesOf(typeof(ICommandHandler<>))
+                .AsClosedTypesOf(typeof(IClientCommandHandler<>))
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<CommandDispatcher>()
-            //    .As<ICommandDispatcher>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(assembly)
+                .AsClosedTypesOf(typeof(ICameraCommandHandler<>))
+                .InstancePerLifetimeScope();
 
-            builder.Register((c, p) => new CommandDispatcher(c.Resolve<IComponentContext>(), p.Named<string>("ClientIP")))
-                .As<ICommandDispatcher>()
+            builder.RegisterType<CameraCommandDispatcher>()
+                .As<ICameraCommandDispatcher>()
+                .InstancePerLifetimeScope();
+
+            builder.Register((c, p) => new ClientCommandDispatcher(c.Resolve<IComponentContext>(), p.Named<string>("ClientIP")))
+                .As<IClientCommandDispatcher>()
                 .InstancePerLifetimeScope();
         }
     }

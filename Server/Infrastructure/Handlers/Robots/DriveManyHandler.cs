@@ -4,7 +4,7 @@ using Protocol.Robots;
 
 namespace Infrastructure.Handlers.Robots
 {
-    public class DriveManyHandler : ICommandHandler<DriveMany>
+    public class DriveManyHandler : IClientCommandHandler<DriveMany>
     {
         private readonly IComponentContext _context;
 
@@ -15,7 +15,7 @@ namespace Infrastructure.Handlers.Robots
 
         public async Task HandleAsync(DriveMany command, string clientIP)
         {
-            var driveHandler = _context.Resolve<ICommandHandler<Drive>>();
+            var driveHandler = _context.Resolve<IClientCommandHandler<Drive>>();
 
             foreach (var drive in command.DriveCommands)
             {

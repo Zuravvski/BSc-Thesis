@@ -21,7 +21,7 @@ namespace Infrastructure.Network.Sockets
 
         private readonly TcpClient _socket;
         private readonly NetworkStream _stream;
-        private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IClientCommandDispatcher _commandDispatcher;
         private readonly IClientRepository _clientRepository;
 
         public bool Connected => _socket != null && _socket.Connected;
@@ -35,7 +35,7 @@ namespace Infrastructure.Network.Sockets
             _clientRepository = clientRepository;
 
             IPAddress = (_socket.Client.RemoteEndPoint as IPEndPoint).Address.ToString();
-            _commandDispatcher = context.Resolve<ICommandDispatcher>(new NamedParameter("ClientIP", IPAddress));
+            _commandDispatcher = context.Resolve<IClientCommandDispatcher>(new NamedParameter("ClientIP", IPAddress));
             ReadAsync();
         }
 

@@ -1,7 +1,13 @@
-﻿namespace Infrastructure.Services.Camera
+﻿using System.Threading.Tasks;
+using Infrastructure.Commands;
+using Protocol;
+
+namespace Infrastructure.Services.Camera
 {
     public interface ICameraService : IService
     {
-        // TODO: Define service structure
+        void Start();
+        Task RequestAsync(ICameraCommand command);
+        void Stop();
     }
 }

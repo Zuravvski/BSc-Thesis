@@ -6,7 +6,7 @@ using Protocol.Users;
 
 namespace Infrastructure.Handlers.Users
 {
-    public class BindManyRobotsHandler : ICommandHandler<BindManyRobots>
+    public class BindManyRobotsHandler : IClientCommandHandler<BindManyRobots>
     {
         private readonly IRobotService _robotService;
 
