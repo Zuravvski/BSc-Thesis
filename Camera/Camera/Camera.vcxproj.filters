@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Communication">
+      <UniqueIdentifier>{3034f710-b32f-4eba-a191-183cc7ac9d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\Requests">
+      <UniqueIdentifier>{f1ebdeb2-1723-408e-8220-66b281bd94a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\Responses">
+      <UniqueIdentifier>{9e9c507c-fa3f-48ea-9717-c12557f00dba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{ec04bdd9-8cff-45e4-91d9-ed66050b4e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MovementTracking">
+      <UniqueIdentifier>{6bd4ab7d-82b3-48e1-a5bf-1fff721de35a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data Structures">
+      <UniqueIdentifier>{268fcf49-03fb-46ba-b27e-d161f3057a49}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RequestFactory.cpp">
+      <Filter>Communication\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CameraService.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleLocation.cpp">
+      <Filter>MovementTracking</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotFrame.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="LEDIndentifier.cpp">
+      <Filter>MovementTracking</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ICommand.h">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Communication\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Positions.h">
+      <Filter>Communication\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Identify.h">
+      <Filter>Communication\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestFactory.h">
+      <Filter>Communication\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraService.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleLocation.h">
+      <Filter>MovementTracking</Filter>
+    </ClInclude>
+    <ClInclude Include="IMovementTracking.h">
+      <Filter>MovementTracking</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotFrame.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="IIdentifier.h">
+      <Filter>MovementTracking</Filter>
+    </ClInclude>
+    <ClInclude Include="LEDIndentifier.h">
+      <Filter>MovementTracking</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -68,7 +68,6 @@
     <Compile Include="Commands\ICommandDispatcher.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="DTO\RobotDTO.cs" />
-    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Handlers\ICameraCommandHandler.cs" />
