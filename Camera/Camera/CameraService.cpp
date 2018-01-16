@@ -2,97 +2,93 @@
 #include <iostream>
 #include <opencv2/highgui.hpp>
 
-CameraService::CameraService() : _windowed(true)
+namespace Zuravvski
 {
-	Initialize();
-}
-
-
-CameraService::~CameraService()
-{
-	ReleaseVideo();
-}
-
-void CameraService::Initialize()
-{
-	if(IsRunning())
+	CameraService::CameraService() : _windowed(true)
 	{
-		return;
+		Initialize();
 	}
 
-	try
+
+	CameraService::~CameraService()
 	{
-		bool result = _video.open(0);
-		if (result)
+		ReleaseVideo();
+	}
+
+	void CameraService::Initialize()
+	{
+		if (IsRunning())
 		{
-			 // Camera settings
-		    _video.set(cv::CAP_PROP_FRAME_WIDTH, 2592 / 2);
-            _video.set(cv::CAP_PROP_FRAME_HEIGHT, 1944 / 2);
-			_video.set(cv::CAP_PROP_FPS, 25);
-			Capture();
+			return;
 		}
-		else
+
+		try
 		{
-			std::cerr << "Could not open camera.";
+			bool result = _video.open(0);
+			if (result)
+			{
+				// Camera settings
+				_video.set(cv::CAP_PROP_FRAME_WIDTH, 2592 / 2);
+				_video.set(cv::CAP_PROP_FRAME_HEIGHT, 1944 / 2);
+				_video.set(cv::CAP_PROP_FPS, 25);
+				Capture();
+			}
+			else
+			{
+				std::cerr << "Could not open camera.";
+				exit(EXIT_FAILURE);
+			}
+		}
+		catch (...)
+		{
+			std::cerr << "Camera cannot be initialized." << std::endl;
 			exit(EXIT_FAILURE);
 		}
 	}
-	catch (...)
+
+	bool CameraService::IsRunning() const
 	{
-		std::cerr << "Camera cannot be initialized." << std::endl;
-		exit(EXIT_FAILURE);
+		return _video.isOpened();
 	}
-}
 
-bool CameraService::IsRunning() const
-{
-	return _video.isOpened();
-}
-
-bool CameraService::IsWindowed() const
-{
-	return _windowed;
-}
-
-void CameraService::SetWindowed(bool windowed)
-{
-	_windowed = windowed;
-}
-
-cv::Mat CameraService::GetCurrentFrame() const
-{
-	return _currentFrame;
-}
-
-void CameraService::Capture()
-{
-	while (_video.isOpened())
+	bool CameraService::IsWindowed() const
 	{
-		cv::Mat currentFrame;
-		bool isSuccessful = _video.read(currentFrame);
-		char keyPressed = cv::waitKey(25);
+		return _windowed;
+	}
 
-		if (!isSuccessful || keyPressed == 27)
+	void CameraService::SetWindowed(bool windowed)
+	{
+		_windowed = windowed;
+	}
+
+	void CameraService::Capture()
+	{
+		while (_video.isOpened())
 		{
-			ReleaseVideo();
-			break;
-		}
+			cv::Mat currentFrame;
+			bool isSuccessful = _video.read(currentFrame);
+			char keyPressed = cv::waitKey(25);
 
-		// Crop the board
-		//_currentFrame = cv::Mat(currentFrame, cv::Rect(272, 2, 964, 964));
-		_currentFrame = currentFrame;
+			if (!isSuccessful || keyPressed == 27)
+			{
+				ReleaseVideo();
+				break;
+			}
 
-		if (_windowed)
-		{
-			imshow("Camera feed", currentFrame);
+			// Crop the 
+			NotifyObservers(cv::Mat(currentFrame, cv::Rect(272, 2, 964, 964)));
+
+			if (_windowed)
+			{
+				imshow("Camera feed", currentFrame);
+			}
 		}
 	}
-}
 
-void CameraService::ReleaseVideo()
-{
-	cv::destroyAllWindows();
-	_video.release();
-	exit(0);
+	void CameraService::ReleaseVideo()
+	{
+		cv::destroyAllWindows();
+		_video.release();
+		exit(0);
+	}
 }
-

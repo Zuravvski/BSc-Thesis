@@ -1,8 +1,11 @@
 #pragma once
 #include "IIdentifier.h"
 
-struct LEDIndentifier : IIdentifier
+namespace Zuravvski
 {
-	void Identify(std::vector<RobotFrame>& robots) override;
-};
+	struct LEDIndentifier : IIdentifier
+	{
+		void Identify(std::vector<RobotFrame>& robots) override;
+	};
+}
 

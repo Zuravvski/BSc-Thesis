@@ -119,6 +119,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraService.cpp" />
+    <ClCompile Include="FrameObservable.cpp" />
+    <ClCompile Include="FrameProcessor.cpp" />
     <ClCompile Include="LEDIndentifier.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RequestFactory.cpp" />
@@ -127,8 +129,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraService.h" />
+    <ClInclude Include="FrameObservable.h" />
+    <ClInclude Include="FrameProcessor.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="Identify.h" />
+    <ClInclude Include="IFrameObserver.h" />
     <ClInclude Include="IIdentifier.h" />
     <ClInclude Include="IMovementTracking.h" />
     <ClInclude Include="LEDIndentifier.h" />

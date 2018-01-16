@@ -4,17 +4,10 @@
 
 using namespace nlohmann;
 
-struct Positions
+namespace Zuravvski
 {
-	std::vector<Positions> positions;
-
-	void to_json(json& j, const std::vector<Position>& positions)
+	struct Positions
 	{
-		j = positions;
-	}
-
-	void from_json(const json& json, const std::vector<Position>& positions)
-	{
-		// TODO
-	}
-};
+		std::vector<Positions> positions;
+	};
+}

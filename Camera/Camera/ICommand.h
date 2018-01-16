@@ -1,5 +1,8 @@
 #pragma once
-struct ICommand
+namespace Zuravvski
 {
-	virtual ~ICommand() = default;
-};
+	struct ICommand
+	{
+		virtual ~ICommand() = default;
+	};
+}

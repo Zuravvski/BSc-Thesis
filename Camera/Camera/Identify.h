@@ -4,10 +4,13 @@
 
 using namespace nlohmann;
 
-struct Identify : ICommand
+namespace Zuravvski
 {
-	unsigned int ID;
-	unsigned int timeout;
+	struct Identify : ICommand
+	{
+		unsigned int ID;
+		unsigned int timeout;
+	};
 
 	void to_json(json& j, const Identify& identify)
 	{
@@ -20,5 +23,4 @@ struct Identify : ICommand
 		auto timeout = json.at("timeout").get<unsigned int>();
 		identify.timeout = timeout == 0 ? 1 : timeout;
 	}
-};
-
+}

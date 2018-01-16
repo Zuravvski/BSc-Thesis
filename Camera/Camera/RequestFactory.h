@@ -5,8 +5,10 @@
 
 using namespace  nlohmann;
 
-struct RequestFactory
+namespace Zuravvski
 {
-	std::unique_ptr<ICommand> GetRequest(const json& json) const;
-};
-
+	struct RequestFactory
+	{
+		std::unique_ptr<ICommand> GetRequest(const json& json) const;
+	};
+}

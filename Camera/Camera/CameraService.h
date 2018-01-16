@@ -1,24 +1,25 @@
 #pragma once
 #include <opencv2/videoio.hpp>
+#include "FrameObservable.h"
 
-class CameraService
+namespace Zuravvski
 {
-public:
-	CameraService();
-	~CameraService();
+	class CameraService : public FrameObservable
+	{
+	public:
+		CameraService();
+		~CameraService();
 
-	bool IsRunning() const;
-	bool IsWindowed() const;
-	void SetWindowed(bool windowed);
-	cv::Mat GetCurrentFrame() const;
+		bool IsRunning() const;
+		bool IsWindowed() const;
+		void SetWindowed(bool windowed);
 
-private:
-	cv::VideoCapture _video;
-	cv::Mat _currentFrame;
-	bool _windowed;
+	private:
+		cv::VideoCapture _video;
+		bool _windowed;
 
-	void Capture();
-	void Initialize();
-	void ReleaseVideo();
-};
-
+		void Capture();
+		void Initialize();
+		void ReleaseVideo();
+	};
+}
