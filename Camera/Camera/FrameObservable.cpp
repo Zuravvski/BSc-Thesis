@@ -9,14 +9,27 @@ namespace Zuravvski
 
 	void FrameObservable::Unsubscribe(const std::shared_ptr<IFrameObserver>& observer)
 	{
-		//_observers.erase(std::find(_observers.begin(), _observers.end(), [&observer](auto currentObserver) { currentObserver == observer; }));
+		for(auto it = _observers.begin(); it != _observers.end(); ++it)
+		{
+			if(auto sp = it->lock())
+			{
+				if(sp == observer)
+				{
+					_observers.erase(it);
+					break;
+				}
+			}
+		}
 	}
 
 	void FrameObservable::NotifyObservers(const cv::Mat& currentFrame)
 	{
 		for (auto& observer : _observers)
 		{
-			observer->GetNotified(currentFrame);
+			if(auto ptr = observer.lock())
+			{
+				ptr->GetNotified(currentFrame);
+			}
 		}
 	}
 }

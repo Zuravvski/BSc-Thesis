@@ -14,12 +14,12 @@ namespace Core.Domain.Robots
     {
         public string IPAddress { get; }
         public int Port { get; }
-        public uint ID { get; }
+        public int ID { get; }
         public ERobotLED LEDS { get; set; }
         public int LeftMotorSpeed { get; protected set; }
         public int RightMotorSpeed { get; protected set; }
         public Position Position { get; protected set; }
-        public uint Battery { get; protected set; }
+        public int Battery { get; protected set; }
         public string BoundTo { get; protected set; }
         public bool Connected => _socket != null && _socket.Connected;
 
@@ -30,7 +30,7 @@ namespace Core.Domain.Robots
         {
             IPAddress = ip;
             Port = port;
-            ID = uint.Parse(ip.Substring(ip.LastIndexOf(".", StringComparison.Ordinal) + 1));
+            ID = int.Parse(ip.Substring(ip.LastIndexOf(".", StringComparison.Ordinal) + 1));
             BoundTo = string.Empty;
             _socket = new TcpClient();
         }

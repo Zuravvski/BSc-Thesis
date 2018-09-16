@@ -1,6 +1,9 @@
 ﻿namespace Protocol.Users
 {
-    public class UnbindAllRobots : ICommand
+    /// <summary>
+    /// The command used for unbinding all owned robots at the same time
+    /// </summary>
+    public sealed class UnbindAllRobots : ICommand
     {
         // No arguments command
     }

@@ -1,5 +1,4 @@
 #pragma once
-#include "../sole/sole.hpp"
 
 namespace cv {
 	class Mat;

@@ -13,7 +13,9 @@ namespace Zuravvski
 		void Unsubscribe(const std::shared_ptr<IFrameObserver>& observer);
 		void NotifyObservers(const cv::Mat& currentFrame);
 
+		using ObserverList = std::vector<std::weak_ptr<IFrameObserver>>;
+
 	private:
-		std::vector<std::shared_ptr<IFrameObserver>> _observers;
+		ObserverList _observers;
 	};
 }

@@ -46,6 +46,9 @@
     <ClCompile Include="FrameProcessor.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Position.cpp">
+      <Filter>Communication\Responses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ICommand.h">

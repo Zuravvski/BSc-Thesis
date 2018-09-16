@@ -61,8 +61,10 @@
   <ItemGroup>
     <Compile Include="Attributes\PacketAttribute.cs" />
     <Compile Include="Commands\CameraCommandDispatcher.cs" />
+    <Compile Include="Commands\Camera\Position.cs" />
+    <Compile Include="Commands\Camera\PositionMany.cs" />
     <Compile Include="Commands\ClientCommandDispatcher.cs" />
-    <Compile Include="Commands\ICameraCommand.cs" />
+    <Compile Include="Commands\Camera\ICameraCommand.cs" />
     <Compile Include="Commands\ICameraCommandDispatcher.cs" />
     <Compile Include="Commands\IClientCommandDispatcher.cs" />
     <Compile Include="Commands\ICommandDispatcher.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="DTO\RobotDTO.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Handlers\Camera\PositionHandler.cs" />
     <Compile Include="Handlers\ICameraCommandHandler.cs" />
     <Compile Include="Handlers\IClientCommandHandler.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
@@ -102,11 +105,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Handlers\Camera\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{D5415AA5-8401-4CE9-9A23-17F32C163755}</Project>

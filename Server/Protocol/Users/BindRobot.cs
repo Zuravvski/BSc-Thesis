@@ -1,7 +1,13 @@
 ﻿namespace Protocol.Users
 {
-    public class BindRobot : ICommand
+    /// <summary>
+    /// The command used to bind a given robot
+    /// </summary>
+    public sealed class BindRobot : ICommand
     {
-        public uint ID { get; set; }
+        /// <summary>
+        /// Robot's ID
+        /// </summary>
+        public int ID { get; set; }
     }
 }

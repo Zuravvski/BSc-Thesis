@@ -2,8 +2,14 @@
 
 namespace Protocol.Users
 {
-    public class BindManyRobots : ICommand
+    /// <summary>
+    /// The command used for binding many robot's at the same time
+    /// </summary>
+    public sealed class BindManyRobots : ICommand
     {
-        public ISet<uint> robotIDs { get; set; }
+        /// <summary>
+        /// Identifiers of robots to be bound
+        /// </summary>
+        public List<int> robotIDs { get; set; }
     }
 }

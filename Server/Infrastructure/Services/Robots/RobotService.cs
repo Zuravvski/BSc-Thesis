@@ -32,7 +32,7 @@ namespace Infrastructure.Services.Robots
             return await _robotRepository.GetAllRobotsAsync();
         }
 
-        public async Task<Robot> GetRobotAsync(uint id)
+        public async Task<Robot> GetRobotAsync(int id)
         {
             return await _robotRepository.GetRobotAsync(id);
         }

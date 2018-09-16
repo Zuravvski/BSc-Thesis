@@ -9,7 +9,7 @@ namespace Infrastructure.Services.Robots
         // CRUD
         Task CreateAsync(string ip);
         Task DeleteAsync(string ip);
-        Task<Robot> GetRobotAsync(uint id);
+        Task<Robot> GetRobotAsync(int id);
         Task<Robot> GetRobotAsync(string ip);
         Task<IEnumerable<Robot>> BrowseAsync();
     }

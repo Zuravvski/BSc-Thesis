@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Infrastructure.Commands;
+using Infrastructure.Commands.Camera;
 using Infrastructure.Repositories;
 using Newtonsoft.Json;
 
@@ -57,20 +58,22 @@ namespace Infrastructure.Services.Camera
 
         private async void ReadAsync()
         {
-            var stdout = _cameraProcess.StandardOutput;
+            var stream = _cameraProcess.StandardError;
+            var settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
+
             while (Running)
             {
                 try
                 {
                     var buffer = new char[1024];
-                    var bytesRead = await stdout.ReadAsync(buffer, 0, buffer.Length);
+                    var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                     if (bytesRead == 0)
                     {
                         _cameraProcess.Close();
                         Running = false;
                         continue;
                     }
-                    var command = JsonConvert.DeserializeObject<ICameraCommand>(Convert.ToString(buffer));
+                    var command = JsonConvert.DeserializeObject<ICameraCommand>(Convert.ToString(buffer), settings);
                     await _commandDispatcher.DispatchAsync(command);
                 }
                 catch

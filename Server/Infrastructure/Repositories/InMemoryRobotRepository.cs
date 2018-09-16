@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories
             return await Task.FromResult(_robots.FirstOrDefault(robot => robot.IPAddress.Equals(ip)));
         }
 
-        public async Task<Robot> GetRobotAsync(uint id)
+        public async Task<Robot> GetRobotAsync(int id)
         {
             return await Task.FromResult(_robots.FirstOrDefault(robot => robot.ID == id));
         }

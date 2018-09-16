@@ -7,7 +7,7 @@ namespace Core.Repositories
     public interface IRobotRepository : IRepository
     {
         Task<Robot> GetRobotAsync(string ip);
-        Task<Robot> GetRobotAsync(uint id);
+        Task<Robot> GetRobotAsync(int id);
         Task<IEnumerable<Robot>> GetAllRobotsAsync();
         Task CreateRobotAsync(Robot robot);
         Task DeleteRobotAsync(string ip);

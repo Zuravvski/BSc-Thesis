@@ -1,6 +1,7 @@
 #include "TriangleLocation.h"
-#include <opencv2/photo.hpp>
 #include "Line.h"
+#include <opencv2/photo.hpp>
+#include <opencv2/highgui.hpp>
 
 namespace Zuravvski
 {
@@ -39,20 +40,20 @@ namespace Zuravvski
 						std::find_if(approxTriangle.begin(), approxTriangle.end(),
 							[&base](Point point) { return base.start != point && base.end != point; }))];
 
-					double angle = atan2(topVertice.y - base.center.y, topVertice.x - base.center.x) * 180 / CV_PI;
+					auto angle = static_cast<int>(atan2(topVertice.y - base.center.y, topVertice.x - base.center.x) * 180 / CV_PI);
 					angle = angle < 0 ? 360 + angle : angle;
 
 					const Point rectStart(base.center.x - 40 < 0 ? 0 : base.center.x - 40, base.center.y - 40 < 0 ? 0 : base.center.y - 40);
 					Mat cropped(frame, Rect(rectStart.x, rectStart.y, 80, 80));
 					robots.emplace_back(RobotFrame(cropped, Position(base.center.x, base.center.y, angle)));
 
-					//circle(img, topVertice, 3, Scalar(0, 255, 0), 3);
-					//line(img, base.start, base.end, Scalar(255, 0, 0), 4);
-					//putText(img, std::to_string(angle), base.center, FONT_HERSHEY_COMPLEX, 0.8, Scalar(0, 0, 255), 2);
+					circle(frame, topVertice, 3, Scalar(0, 255, 0), 3);
+					line(frame, base.start, base.end, Scalar(255, 0, 0), 4);
+					putText(frame, std::to_string(angle), base.center, FONT_HERSHEY_COMPLEX, 0.8, Scalar(0, 0, 255), 2);
 				}
 			}
-			//namedWindow("src", WINDOW_KEEPRATIO);
-			//imshow("src", img);
+			namedWindow("src", WINDOW_KEEPRATIO);
+			imshow("src", frame);
 		}
 		return robots;
 	}

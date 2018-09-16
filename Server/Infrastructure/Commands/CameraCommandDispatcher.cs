@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Autofac;
+using Infrastructure.Commands.Camera;
 using Infrastructure.Handlers;
 
 namespace Infrastructure.Commands

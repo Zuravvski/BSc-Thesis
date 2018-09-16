@@ -1,7 +1,13 @@
 ﻿namespace Protocol.Users
 {
-    public class UnbindRobot : ICommand
+    /// <summary>
+    /// The command used to unbind a given owned robot
+    /// </summary>
+    public sealed class UnbindRobot : ICommand
     {
-        public uint ID { get; set; }
+        /// <summary>
+        /// Robot's ID
+        /// </summary>
+        public int ID { get; set; }
     }
 }

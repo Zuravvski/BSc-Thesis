@@ -1,6 +1,9 @@
 ﻿namespace Protocol.Robots
 {
-    public class BrowseAvailableRobots : ICommand
+    /// <summary>
+    /// The command used for getting available robots
+    /// </summary>
+    public sealed class BrowseAvailableRobots : ICommand
     {
         // No arguments command
     }

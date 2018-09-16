@@ -1,6 +1,6 @@
 ﻿using Protocol;
 
-namespace Infrastructure.Commands
+namespace Infrastructure.Commands.Camera
 {
     public interface ICameraCommand : ICommand
     {

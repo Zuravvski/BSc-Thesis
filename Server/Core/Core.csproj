@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Robots\Enums\ERobotLED.cs" />
+    <Compile Include="Domain\Robots\Enums\EPositionState.cs" />
     <Compile Include="Domain\Robots\Robot.cs" />
     <Compile Include="Domain\Robots\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

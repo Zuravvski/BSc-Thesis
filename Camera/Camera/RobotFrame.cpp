@@ -18,6 +18,6 @@ namespace Zuravvski
 
 	void RobotFrame::Identify(bool value)
 	{
-		_position.identified = value;
+		_position.Identified = value;
 	}
 }

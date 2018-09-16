@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Infrastructure.Commands.Camera;
 
 namespace Infrastructure.Commands
 {

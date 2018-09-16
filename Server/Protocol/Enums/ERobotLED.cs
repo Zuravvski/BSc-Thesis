@@ -2,6 +2,9 @@
 
 namespace Protocol.Enums
 {
+    /// <summary>
+    /// Enummeration describing robot's LED states
+    /// </summary>
     public enum ERobotLED
     {
         [Description("00")]
